@@ -1,18 +1,9 @@
-export const Options = ({good, neutral, bad, change}) => {
+  export const Options = ({ onUpdate}) => {
     return (
-      <div>
-        <button onClick={good} >
-        Good
-        </button>
-        <button onClick={neutral}>
-        Neutral
-        </button>
-        <button onClick={bad} >
-        Bad
-        </button>
-        <button onClick={change} >
-        change
-        </button>
-      </div>
-    );
-  };
+        <div>
+            <button onClick={() => onUpdate("good")} >Good</button>
+            <button onClick={() => onUpdate("neutral")} >Neutral</button>
+            <button onClick={() => onUpdate("bad")} >Bad</button>
+         </div>
+    )
+}

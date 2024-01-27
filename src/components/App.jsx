@@ -3,30 +3,29 @@ import { Feedback } from './Feedback';
 import { useState } from 'react';
 
 export const App = () => {
-  const [typeFeedback, setTypeFeedback] = useState(
+  const [countFeedback, setCountFeedback] = useState(
     {
       good: 0,
       neutral: 0,
-      bad: 0
+      bad: 0,
     }
   );
 
-  const changeTypeFeedbacks = () => {
-    setTypeFeedback ({
-      ...typeFeedback,
-      good: 1,
+  const changeCountFeedback = (option) => {
+    setCountFeedback ({
+      ...countFeedback,
+      [option]: countFeedback[option] + 1
     });
   };
   
   return (
   <>
     <Options 
-      good={typeFeedback.good}
-      neutral={typeFeedback.neutral}
-      bad={typeFeedback.bad}
-      change={changeTypeFeedbacks}
+      onUpdate={changeCountFeedback}
     />
-    <Feedback />
+    <Feedback 
+      countFeedback={countFeedback}
+    />
   </>
 );
 };
