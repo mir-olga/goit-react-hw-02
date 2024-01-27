@@ -1,5 +1,7 @@
 import { Options } from './Options';
 import { Feedback } from './Feedback';
+import { Notification } from './Notification';
+
 import { useState } from 'react';
 
 export const App = () => {
@@ -11,23 +13,33 @@ export const App = () => {
     }
   );
 
+  //const [totalFeedback, setTotalFeedback] = useState(0);
+
   const changeCountFeedback = (option) => {
     setCountFeedback ({
       ...countFeedback,
       [option]: countFeedback[option] + 1
     });
   };
+
+  let totalFeedback=countFeedback.good+countFeedback.neutral+countFeedback.bad;
   
   return (
   <>
     <Options 
       onUpdate={changeCountFeedback}
     />
-    <Feedback 
+    {
+      totalFeedback==0 ? 
+      <Notification /> : 
+      <Feedback 
       countFeedback={countFeedback}
+      totalFeedback={totalFeedback}
     />
-  </>
-);
+    }
+
+    </>
+ );
 };
 
 //---------------------------------------------------------//
