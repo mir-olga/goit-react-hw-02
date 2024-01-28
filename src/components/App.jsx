@@ -13,21 +13,34 @@ export const App = () => {
     }
   );
 
-  //const [totalFeedback, setTotalFeedback] = useState(0);
+  const [totalFeedback, setTotalFeedback] = useState(0);
 
   const changeCountFeedback = (option) => {
     setCountFeedback ({
       ...countFeedback,
       [option]: countFeedback[option] + 1
     });
+
+    setTotalFeedback(totalFeedback+1);
   };
 
-  let totalFeedback=countFeedback.good+countFeedback.neutral+countFeedback.bad;
+  const onResetCountFeedback = () => {
+    setCountFeedback({
+      ...countFeedback,
+      good: 0,
+      neutral: 0,
+      bad: 0
+    });
+
+    setTotalFeedback(0);
+  };
+
+  //let totalFeedback=countFeedback.good+countFeedback.neutral+countFeedback.bad;
   
   return (
   <>
     <Options 
-      onUpdate={changeCountFeedback}
+      onUpdate={changeCountFeedback} totalFeedback={totalFeedback} onReset={onResetCountFeedback}
     />
     {
       totalFeedback==0 ? 

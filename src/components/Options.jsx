@@ -1,9 +1,11 @@
-  export const Options = ({ onUpdate}) => {
+  export const Options = ({ onUpdate, onReset, totalFeedback}) => {
+  
     return (
         <div>
             <button onClick={() => onUpdate("good")} >Good</button>
             <button onClick={() => onUpdate("neutral")} >Neutral</button>
-            <button onClick={() => onUpdate("bad")} >Bad</button>
+            <button onClick={() => onUpdate("bad")} >Bad </button>
+            {(totalFeedback>0) && <button onClick={() => onReset("reset")} >Reset </button>}
          </div>
-    )
-}
+    );
+};
