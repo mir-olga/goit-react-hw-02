@@ -1,3 +1,4 @@
+import { Description } from './Description';
 import { Options } from './Options';
 import { Feedback } from './Feedback';
 import { Notification } from './Notification';
@@ -35,10 +36,12 @@ export const App = () => {
     setTotalFeedback(0);
   };
 
-  //let totalFeedback=countFeedback.good+countFeedback.neutral+countFeedback.bad;
+  let total=countFeedback.good+countFeedback.neutral+countFeedback.bad;
+  let positive = Math.round(((countFeedback.good + countFeedback.neutral) / total) * 100);
   
   return (
   <>
+    <Description/>
     <Options 
       onUpdate={changeCountFeedback} totalFeedback={totalFeedback} onReset={onResetCountFeedback}
     />
@@ -47,7 +50,8 @@ export const App = () => {
       <Notification /> : 
       <Feedback 
       countFeedback={countFeedback}
-      totalFeedback={totalFeedback}
+      total={total}
+      positive={positive}
     />
     }
 
