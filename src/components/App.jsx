@@ -3,18 +3,40 @@ import { Options } from './Options';
 import { Feedback } from './Feedback';
 import { Notification } from './Notification';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const App = () => {
-  const [countFeedback, setCountFeedback] = useState(
-    {
+  const [countFeedback, setCountFeedback] = useState(() => {
+    // Зчитуємо значення за ключем
+    const savedObject = window.localStorage.getItem("saved-countFeedback");
+  
+    // Якщо там щось є, парсимо і повертаємо  це значення як початкове значення стану
+    if (savedObject !== null) {
+      //console.log(savedObject);
+      return JSON.parse(savedObject);
+    }
+  
+    // У протилежному випадку повертаємо яке-небудь значення за замовчуванням
+    return {
       good: 0,
       neutral: 0,
       bad: 0,
-    }
-  );
+    };
+  });
 
-  const [totalFeedback, setTotalFeedback] = useState(0);
+  const [totalFeedback, setTotalFeedback] = useState(()=> {
+    const savedClicks = window.localStorage.getItem("saved-totalFeedback");
+    if (savedClicks !== null) {
+      return savedClicks;
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-countFeedback', JSON.stringify(countFeedback));
+    window.localStorage.setItem('saved-totalFeedback', totalFeedback);
+  }, [countFeedback, totalFeedback]);
+
 
   const changeCountFeedback = (option) => {
     setCountFeedback ({
@@ -58,6 +80,9 @@ export const App = () => {
     </>
  );
 };
+
+
+
 
 //---------------------------------------------------------//
 /*export const App = () => {
