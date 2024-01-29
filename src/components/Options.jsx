@@ -1,13 +1,13 @@
 import css from './Options.module.css';
 
-export const Options = ({ onUpdate, onReset, totalFeedback}) => {
+export const Options = ({ onFeedbackSelection, onResetCountFeedback, isFeedback}) => {
   
     return (
-        <div>
-            <button className={css.button} onClick={() => onUpdate("good")} >Good</button>
-            <button className={css.button} onClick={() => onUpdate("neutral")} >Neutral</button>
-            <button className={css.button} onClick={() => onUpdate("bad")} >Bad </button>
-            {(totalFeedback>0) && <button className={css.button} onClick={() => onReset("reset")} >Reset </button>}
+        <div  className={css.options}>
+            <button className={css.button} onClick={() => onFeedbackSelection("good")} >Good</button>
+            <button className={css.button} onClick={() => onFeedbackSelection("neutral")} >Neutral</button>
+            <button className={css.button} onClick={() => onFeedbackSelection("bad")} >Bad </button>
+            {!isFeedback && <button className={css.button} onClick={() => onResetCountFeedback()} >Reset </button>}
          </div>
     );
 };

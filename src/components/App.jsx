@@ -24,27 +24,15 @@ export const App = () => {
     };
   });
 
-  const [totalFeedback, setTotalFeedback] = useState(()=> {
-    const savedClicks = window.localStorage.getItem("saved-totalFeedback");
-    if (savedClicks !== null) {
-      return savedClicks;
-    }
-    return 0;
-  });
-
   useEffect(() => {
     window.localStorage.setItem('saved-countFeedback', JSON.stringify(countFeedback));
-    window.localStorage.setItem('saved-totalFeedback', totalFeedback);
-  }, [countFeedback, totalFeedback]);
+  }, [countFeedback]);
 
-
-  const changeCountFeedback = (option) => {
+  const onFeedbackSelection = (option) => {
     setCountFeedback ({
       ...countFeedback,
       [option]: countFeedback[option] + 1
     });
-
-    setTotalFeedback(totalFeedback+1);
   };
 
   const onResetCountFeedback = () => {
@@ -54,26 +42,22 @@ export const App = () => {
       neutral: 0,
       bad: 0
     });
-
-    setTotalFeedback(0);
   };
 
-  let total=countFeedback.good+countFeedback.neutral+countFeedback.bad;
-  let positive = Math.round(((countFeedback.good + countFeedback.neutral) / total) * 100);
-  
+  const isFeedback = countFeedback.good+countFeedback.neutral+countFeedback.bad === 0;
+  //console.log(isFeedback);
+
   return (
   <>
     <Description/>
     <Options 
-      onUpdate={changeCountFeedback} totalFeedback={totalFeedback} onReset={onResetCountFeedback}
+      onFeedbackSelection={onFeedbackSelection} isFeedback={isFeedback} onResetCountFeedback={onResetCountFeedback}
     />
     {
-      totalFeedback==0 ? 
-      <Notification /> : 
+      isFeedback ? 
+      <Notification noFeedback="No feedback yet"/> : 
       <Feedback 
       countFeedback={countFeedback}
-      total={total}
-      positive={positive}
     />
     }
 

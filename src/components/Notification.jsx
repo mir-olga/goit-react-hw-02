@@ -1,7 +1,7 @@
-export const Notification = () => {
+export const Notification = ({noFeedback}) => {
     return (
-        <div>
-            <p>No feedback yet</p>
+        <div style={{ margin: '20px'}}>
+            <p>{noFeedback}</p>
          </div>
     )
 }
