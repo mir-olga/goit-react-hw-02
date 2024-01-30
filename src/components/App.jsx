@@ -37,6 +37,7 @@ export const App = () => {
       ...countFeedback,
       [option]: countFeedback[option] + 1
     });
+    
     setClicks(clicks + 1);
   };
 
