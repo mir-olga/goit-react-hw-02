@@ -1,6 +1,8 @@
+import css from './Notification.module.css';
+
 export const Notification = ({noFeedback}) => {
     return (
-        <div style={{ margin: '20px'}}>
+        <div className={css.notification}>
             <p>{noFeedback}</p>
          </div>
     )

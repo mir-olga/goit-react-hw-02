@@ -1,3 +1,5 @@
+import css from './Feedback.module.css';
+
 export const Feedback = ({countFeedback}) => {
 
     let totalFeedback=countFeedback.good+countFeedback.neutral+countFeedback.bad;
@@ -8,7 +10,7 @@ export const Feedback = ({countFeedback}) => {
       }
     
     return (
-        <div style={{ margin: '20px'}}>
+        <div className={css.feedback}>
             <p> Good: {countFeedback.good}</p>
             <p> Neutral: {countFeedback.neutral}</p>
             <p> Bad: {countFeedback.bad} </p>
